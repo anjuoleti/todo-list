@@ -1,0 +1,180 @@
+<html>
+    <head>
+        <style>
+            body{
+                width:100%;
+                height:100vh;
+                background:linear-gradient(blue,rgb(74, 74, 141),rgb(19, 19, 122));
+               
+            }
+            .list{
+                width:100%;
+                max-width: 400px;
+                padding:30px 30px 50px;
+              
+                background-color: aliceblue;
+                margin:100px auto 30px;
+                border-radius: 30px;
+                
+                
+               
+            }
+            h1{
+                margin-top: -0.5px;
+                margin-left: -5px;
+                
+            }
+            img{
+                width:70px;
+                height:50px;
+                margin-left: 120px;
+                margin-top: -60px;
+                border-radius: 50%;
+            }
+            #text1{
+                width:350px;
+                height:40px;
+                position: relative;
+                border-radius:40px;
+                border:none;
+                outline:none;
+                padding-left: 5px;
+            }
+            button{
+                position: absolute;
+                margin-left: -45px;
+                height:40px;
+                border-radius: 40px;
+                padding-left:25px;
+                padding-right: 25px;
+                border:none;
+                outline:none;
+                background-color:blue;
+                
+                
+            }
+            #list3{
+                position: relative;
+            }
+            ul li{
+                list-style:none;
+                
+                font-size: 25px;
+                
+                height:40px;
+                position: relative;
+                padding-left:5px;
+                
+                }
+            
+             ul li::before{
+                content: '';
+                position:absolute;
+                height:20px;
+                width:20px;
+                left:-40px;
+                background-image: url(https://tse3.mm.bing.net/th?id=OIP.gKd5RjPWMVp6s2e1fnq5aAHaHa&pid=Api&P=0);
+                background-size: cover;
+                background-position: center;
+             } 
+               
+               .checked{
+                text-decoration: line-through;
+                position: relative;
+               
+               }
+               ul li.checked::before{
+                content:'';
+                position:absolute;
+                width:20px;
+                height:20px;
+                background-image: url(https://storage.needpix.com/rsynced_images/checkbox-303113_1280.png);
+                background-size: cover;
+                background-position: center;
+
+               }
+               span{
+                position:absolute;
+                left:350px;
+                width:25px;
+                height:25px;
+                text-align: center;
+
+               }
+               span:hover{
+                background-color:rgb(19, 19, 193);
+              
+                
+
+               }
+        </style>
+    </head>
+    <!-- when refresh all list is gone to store we should should store in local storage for that set item is used it stores data of unordered list in var name called data it is in local storage it should be written where we are updating the content or performing any tasks  or changing data 
+    to display the data in local storage we need get item
+toggle is used when click on it it strikes off when we again click on it it removes strike off
+parentelement is li-->
+    <body>
+        <div class="list">
+           <h1>todo-list</h1> <img src="https://tse1.mm.bing.net/th?id=OIP.6j29Aofb4EsvTLXlK54-5wAAAA&pid=Api&P=0">
+        
+        <div class="list1">
+            <input type="text" id="text1" placeholder="enter-text">
+            <button onclick="textfunction()">ADD</button>
+        </div>
+            <ul id="list3">
+                <!-- <li class="checked" >task1</li>
+                <li>task2</li>
+                <li>task3</li>
+                <li>task4</li> -->
+            </ul>
+        </div>
+        <script>
+            var text1=document.getElementById("text1");
+            var list3=document.getElementById("list3")
+            function textfunction(){
+            if (text1.value===''){
+                alert("write something")
+            }
+            else{
+                let li=document.createElement("li");
+                li.innerHTML=text1.value;
+                list3.appendChild(li);
+                let span=document.createElement("span")
+                span.innerHTML="\u00d7";
+                li.appendChild(span);
+                
+            }
+            text1.value="";
+            setdata();
+        }
+
+            list3.addEventListener('click',function(e){
+               if( e.target.tagName==="LI"){
+                e.target.classList.toggle("checked");
+                setdata();
+
+               }
+               
+               else if (e.target.tagName==="SPAN"){
+                e.target.parentElement.remove();
+                setdata();
+               }
+               
+            
+
+            })
+               
+
+        
+            function setdata(){
+                localStorage.setItem("data",list3.innerHTML);
+            }
+            function getdata(){
+                list3.innerHTML=localStorage.getItem("data");
+            }
+            getdata();
+            
+
+        </script>
+    </body>
+</html>
